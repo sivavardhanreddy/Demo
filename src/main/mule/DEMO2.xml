@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd">
+	<http:listener-config name="HTTP_Listener_config1" doc:name="HTTP Listener config" doc:id="48beed2f-ef62-4bd6-8fe0-294decc955b1" >
+		<http:listener-connection host="0.0.0.0" port="8082" />
+	</http:listener-config>
+	<flow name="DEMO2Flow" doc:id="7b8c68c7-9507-4d85-80eb-096c1fc711ed" >
+		<http:listener doc:name="Listener" doc:id="6f6fed05-3f6a-4753-ab64-198a448814dd" config-ref="HTTP_Listener_config" path="DEMO2"/>
+		<set-variable value="I am " doc:name="Set Variable" doc:id="ff3be4d8-8bae-4c91-aa7f-d5fae94c3149" variableName="X"/>
+		<set-variable value="mule soft developer" doc:name="Set Variable" doc:id="c07724f4-05a1-4849-bac8-4fc20cc682c6" variableName="y"/>
+		<set-payload value="#[vars.X ++ vars.y]" doc:name="Set Payload" doc:id="2bc35730-02e5-430b-b5c9-f6ca37357724" />
+		<logger level="INFO" doc:name="Logger" doc:id="edcc390a-2df1-4fe8-8b2c-7c055430d6c1" message="#[payload]"/>
+	</flow>
+	<flow name="DEMO2Flow1" doc:id="479cde41-f2eb-4073-be89-08c1763086d5" >
+		<http:listener doc:name="Listener" doc:id="a082e711-3563-4b18-bf69-73227069727b" config-ref="HTTP_Listener_config1" path="demo3"/>
+		<set-payload value='#["iam siva mule soft developer"]' doc:name="Set Payload" doc:id="f13d38c7-0ce8-41fd-8313-8152db9fbc91" />
+	</flow>
+</mule>
